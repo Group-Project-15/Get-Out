@@ -9,6 +9,7 @@ let base_url = "http://localhost:3000/"
         $("#form-register").hide()
         $("#logout").hide()
         $("#register").show()
+        $("#information").hide()
         
       } else {
         $("#name").show()
@@ -18,12 +19,15 @@ let base_url = "http://localhost:3000/"
         $("#form-register").hide()
         $("#logout").show()
         $("#register").hide()
+        $("#information").show()
         getWeather()
         getAirQuality()
         getNews()
 
       }
     }
+
+    // ========== login ==========
     function login() {
       const email = $("#login-email").val()
       const password = $("#login-password").val()
@@ -47,6 +51,7 @@ let base_url = "http://localhost:3000/"
         })
     }
 
+    // ============log out ===========
     function logout() {
       localStorage.clear()
       var auth2 = gapi.auth2.getAuthInstance();
@@ -56,7 +61,7 @@ let base_url = "http://localhost:3000/"
       aut()
     }
 
-
+    // ============ show form register ===========
     function showRegisterForm() {
         $("#form-login").hide()
         $("#form-register").show()
@@ -70,6 +75,7 @@ let base_url = "http://localhost:3000/"
         $("#welcome").hide()
     }
 
+    // ============= register ==============
     function register() {
       const email = $("#register-email").val()
       const password = $("#register-password").val()
@@ -91,6 +97,7 @@ let base_url = "http://localhost:3000/"
         })
     }
 
+    // =========== google login ============
     function onSignIn(googleUser) {
       var id_token = googleUser.getAuthResponse().id_token
       $.ajax({
@@ -110,7 +117,7 @@ let base_url = "http://localhost:3000/"
         })
     }
 
-    // ========== menampilkan information =============
+    // ========== menampilkan information 3RD API weather, AirQuality, news=============
     function getWeather() {
         $.ajax({
             url: base_url + "informations/weather",
@@ -120,7 +127,19 @@ let base_url = "http://localhost:3000/"
             }
           })
             .done(response => {
-                $("#information").empty()
+                $("#weather-api").empty()
+                $("#weather-api").append(`
+                    <div class="card col-md-6" style="width: 18rem">
+                        <div class="card-body" >
+                        <h5 class="card-title">Weather</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${response.weather}</h6>
+                        <h5 class="card-title">Temp</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${response.temp}°C</h6>
+                        <p class="card-text">${response.city}</p>
+                        </div>
+                    </div>
+                `)
+
             })
             .fail(err => {
                 console.log(err)
@@ -135,7 +154,23 @@ let base_url = "http://localhost:3000/"
             }
           })
           .done(response => {
-            $("#information").empty()
+            $("#air-api").empty()
+            $("#air-api").append(`
+            <div class="card col-md-6" style="width: 18rem">
+              <div class="card-body" style="background-color: ${response.color};">
+                <h5 class="card-title">Air Quality</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${response.aqius}</h6>
+                <h5 class="card-title">Index</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${response.index}</h6>
+                <!-- {
+                  response dari server 
+              "aqius": 86,
+              "index": "Moderate",
+              "color": "yellow"
+          } -->
+              </div>
+            </div>
+            `)
           })
           .fail(err => {
             console.log(err)
@@ -150,7 +185,19 @@ let base_url = "http://localhost:3000/"
             }
           })
           .done(response => {
-            $("#information").empty()
+            $("#news-api").empty()
+            response.forEach(value => {
+                $("#news-api").append(`
+                <div class="card" style="width: 18rem">
+                  <div class="card-body" ">
+                    <h5 class="card-title">News</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${value.title}</h6>
+                    <img src=${value.image} height="150" width="200"><br>
+                  </div>
+                </div>
+                
+                `)
+            })
           })
           .fail(err => {
             console.log(err)
