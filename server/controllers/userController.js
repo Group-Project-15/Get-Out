@@ -12,6 +12,10 @@ class UserController {
       location: req.body.location
     }
 
+    if(newUser.location === ''){
+      newUser.location = "Jakarta"
+    }
+
     User.create(newUser)
     .then(data => {
       res.status(201).json(data)
@@ -34,12 +38,13 @@ class UserController {
       let password = comparePass(req.body.password, data.password)
       if(!password) throw({name: "custom", msg: "Wrong Email or Password", status: 400})
 
-      let token = generateToken({
+      let access_token = generateToken({
         id: data.id,
-        email: data.email
+        email: data.email,
+        location: data.location
       })
 
-      res.status(200).json({token})
+      res.status(200).json({access_token})
     })
     .catch(err => {
       next(err)
