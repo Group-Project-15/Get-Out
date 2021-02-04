@@ -18,7 +18,10 @@ let base_url = "http://localhost:3000/"
         $("#form-register").hide()
         $("#logout").show()
         $("#register").hide()
-        getTodos()
+        getWeather()
+        getAirQuality()
+        getNews()
+
       }
     }
     function login() {
