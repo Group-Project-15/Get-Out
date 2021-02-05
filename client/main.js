@@ -106,6 +106,7 @@ let base_url = "http://localhost:3000/"
     // =========== google login ============
     function onSignIn(googleUser) {
       var id_token = googleUser.getAuthResponse().id_token
+      console.log(id_token);
       $.ajax({
         url: base_url + 'googlelogin',
         method: 'POST',

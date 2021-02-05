@@ -50,7 +50,7 @@ class UserController {
         location: data.location
       })
 
-      res.status(200).json({access_token})
+      res.status(200).json({token: access_token})
     })
     .catch(err => {
       next(err)
@@ -59,6 +59,7 @@ class UserController {
 
   //-----------Google Login User------------
   static googleLogin(req, res, next){
+    console.log("masuk google login");
     const client = new OAuth2Client(process.env.USER_ID);
     let email
     console.log(req.body.googleToken, "TOKEN GOOGLE");
@@ -84,11 +85,11 @@ class UserController {
           email: data.email,
           location: data.location
         })
-        res.status(200).json({access_token})
+        res.status(200).json({token: access_token})
       }
       else{
         return User.create({
-          email, 
+          email: email, 
           password: "googlePass",
           location: "Jakarta"
         })
