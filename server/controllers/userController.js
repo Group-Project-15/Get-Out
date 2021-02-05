@@ -61,7 +61,7 @@ class UserController {
   static googleLogin(req, res, next){
     const client = new OAuth2Client(process.env.USER_ID);
     let email
-
+    console.log(req.body.googleToken, "TOKEN GOOGLE");
     client.verifyIdToken({
       idToken: req.body.googleToken,
       audience: process.env.USER_ID
@@ -77,6 +77,7 @@ class UserController {
       })
     })
     .then(data=> {
+      console.log("MASUK SINI");
       if(data){
         let access_token = generateToken({
           id: data.id,
