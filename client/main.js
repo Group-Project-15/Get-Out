@@ -46,7 +46,9 @@ let base_url = "http://localhost:3000/"
           aut()
         })
         .fail((xhr, text) => {
-          console.log(xhr, text)
+          let errorMsg = xhr.responseJSON.Error
+          $(".errorClass").remove()
+          $("#form-login").append(`<center><p class="errorClass"><b style="color: red;">${errorMsg}</b></p></center>`);
         })
         .always(_ => {
           $("#isi-form-login").trigger("reset")
@@ -96,7 +98,10 @@ let base_url = "http://localhost:3000/"
           aut()
         })
         .fail((xhr, text) => {
-          console.log(xhr, text)
+          console.log(xhr, "<<<<ERROR");
+          let errorMsg = xhr.responseJSON.error
+          $(".errorClass").remove()
+          $("#form-register").append(`<center><p class="errorClass"><b style="color: red;">${errorMsg}</b></p></center>`);
         })
         .always(_ => {
           $("#isi-form-register").trigger("reset")
