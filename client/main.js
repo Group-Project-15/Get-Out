@@ -10,6 +10,7 @@ let base_url = "http://localhost:3000/"
         $("#logout").hide()
         $("#register").show()
         $("#information").hide()
+        $("#cancel").hide()
         
       } else {
         $("#name").show()
@@ -20,6 +21,7 @@ let base_url = "http://localhost:3000/"
         $("#logout").show()
         $("#register").hide()
         $("#information").show()
+        $("#cancel").hide()
         getWeather()
         getAirQuality()
         getNews()
@@ -40,14 +42,14 @@ let base_url = "http://localhost:3000/"
         }
       })
         .done(response => {
-          localStorage.setItem("access_token", response.token)
+          localStorage.setItem("access_token", response.access_token)
           aut()
         })
         .fail((xhr, text) => {
           console.log(xhr, text)
         })
         .always(_ => {
-          $("#form-login").trigger("reset")
+          $("#isi-form-login").trigger("reset")
         })
     }
 
@@ -73,6 +75,7 @@ let base_url = "http://localhost:3000/"
         $("#register").hide()
         $("#google-button").show()
         $("#welcome").hide()
+        $("#cancel").show()
     }
 
     // ============= register ==============
@@ -95,6 +98,9 @@ let base_url = "http://localhost:3000/"
         .fail((xhr, text) => {
           console.log(xhr, text)
         })
+        .always(_ => {
+          $("#isi-form-register").trigger("reset")
+        })
     }
 
     // =========== google login ============
@@ -109,8 +115,7 @@ let base_url = "http://localhost:3000/"
         }
       })
         .done(response => {
-          console.log(response)
-          localStorage.setItem("access_token", response.token)
+          localStorage.setItem("access_token", response.access_token)
           aut()
         })
         .fail(err => {
@@ -124,7 +129,7 @@ let base_url = "http://localhost:3000/"
             url: base_url + "informations/weather",
             method: "GET",
             headers: {
-                token: localStorage.getItem("access_token")
+              access_token: localStorage.getItem("access_token")
             }
           })
             .done(response => {
@@ -151,7 +156,7 @@ let base_url = "http://localhost:3000/"
             url: base_url + "informations/air",
             method: "GET",
             headers: {
-                token: localStorage.getItem("access_token")
+              access_token: localStorage.getItem("access_token")
             }
           })
           .done(response => {
@@ -182,7 +187,7 @@ let base_url = "http://localhost:3000/"
             url: base_url + "informations/news",
             method: "GET",
             headers: {
-                token: localStorage.getItem("access_token")
+              access_token: localStorage.getItem("access_token")
             }
           })
           .done(response => {
@@ -224,6 +229,10 @@ let base_url = "http://localhost:3000/"
       $("#form-register").on("submit", (e) => {
         e.preventDefault()
         register()
+      })
+
+      $("#cancel").on("click", (e) => {
+        aut()
       })
 
     });

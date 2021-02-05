@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-signin-client_id" content="74474872696-p784qt52l59a4uhrh1bt4egpjrsj8buo.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content="669124168393-loiv81narsjln9ffoignjj6d0c8u81sv.apps.googleusercontent.com">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
-  <style>
-    body {
-     background-color: rgb(108, 201, 231);
-    }
-  </style>
+
 </head>
 <body>
   <div id="name" class="border">
@@ -64,7 +61,7 @@
   <div id="form-login">
     <center>
       <h1>form Login</h1>
-      <form >
+      <form id="isi-form-login">
         <div class="form-group">
           <label for="">Email:</label><br>
           <input type="text" id="login-email"><br>
@@ -80,12 +77,12 @@
   <div id="form-register">
     <center>
       <h1>form Register</h1>
-      <form >
+      <form id="isi-form-register">
         <div class="form-group">
           <label for="">Email:</label><br>
           <input type="text" id="register-email"><br>
           <label for="">Password:</label><br>
-          <input type="text" id="register-password"><br>
+          <input type="password" id="register-password"><br>
           <label for="">Location::</label><br>
           <div class="col-md-2">
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="location" id="register-location">
@@ -93,13 +90,6 @@
                 <option value="Jakarta">Jakarta</option>
                 <option value="Bandung">Bandung</option>
                 <option value="Surabaya">Surabaya</option>
-                <option value="Bogor">Bogor</option>
-                <option value="Semarang">Semarang</option>
-                <option value="Denpasar">Denpasar</option>
-                <option value="Palembang">Palembang</option>
-                <option value="Jambi">Jambi</option>
-                <option value="Pontianak">Pontianak</option>
-                <option value="Samarinda">Samarinda</option>
               </select><br>
           </div>
           <!-- <input type="text" id="register-location"><br> -->
@@ -113,6 +103,14 @@
   <div id="google-button">
     <center>
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </center>
+  </div>
+
+  <div>
+    <center>
+      <button id="cancel" class="btn btn-danger mb-2">
+        Cancel
+      </button>
     </center>
   </div>
 
