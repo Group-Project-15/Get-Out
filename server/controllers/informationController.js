@@ -21,7 +21,7 @@ class InformationController {
   }
 
   static fetchAir(req, res, next) {
-    const city = req.query.city || "Jakarta"
+    const city = req.decode.location || "Jakarta"
     let state
     if (city === "Jakarta") state = "Jakarta"
     else if (city === "Bandung") state = "West Java"
