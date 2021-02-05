@@ -50,7 +50,7 @@ class UserController {
         location: data.location
       })
 
-      res.status(200).json({token: access_token})
+      res.status(200).json({access_token})
     })
     .catch(err => {
       next(err)
@@ -59,10 +59,8 @@ class UserController {
 
   //-----------Google Login User------------
   static googleLogin(req, res, next){
-    console.log("masuk google login");
     const client = new OAuth2Client(process.env.USER_ID);
     let email
-    console.log(req.body.googleToken, "TOKEN GOOGLE");
     client.verifyIdToken({
       idToken: req.body.googleToken,
       audience: process.env.USER_ID
@@ -78,14 +76,13 @@ class UserController {
       })
     })
     .then(data=> {
-      console.log("MASUK SINI");
       if(data){
         let access_token = generateToken({
           id: data.id,
           email: data.email,
           location: data.location
         })
-        res.status(200).json({token: access_token})
+        res.status(200).json({access_token})
       }
       else{
         return User.create({
