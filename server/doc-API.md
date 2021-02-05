@@ -72,6 +72,23 @@ Response (404 - Data not found)
     "error": `email not found`
 }
 
+POST /googlelogin
+- User login with google
+
+Request Headers
+{
+    Not needed
+}
+
+Request Body
+{
+    idToken: googleToken
+}
+
+Response (200 - Ok)
+{
+    "access_token": <get by sistem>
+}
 
 GET /informations/weather
 - Get informations about weather
